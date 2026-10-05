@@ -1,0 +1,21 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+
+# whisper.cpp build (not stored in this repo; built by setup.sh)
+build/
+models/*.bin
+
+# runtime artifacts
+*.wav
+*.json
+*.log
+out/
+
+# editor/OS
+.DS_Store
+.idea/
+.vscode/

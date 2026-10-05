@@ -1,0 +1,36 @@
+# corrections.yaml — per-project proper-noun fixes (template)
+#
+# Whisper garbles proper nouns systematically (places, orgs, people, product
+# names). Each entry is applied as a Python re.sub() over the WHOLE transcript,
+# so keep patterns NARROW: word boundaries and full phrases. A bad pattern
+# corrupts the verbatim record.
+#
+# Rules:
+#   - case sensitive (the parser is a strict YAML-subset, no PyYAML needed)
+#   - verify every name against an official source (seminar page, org site)
+#     and the speakers' own self-introductions before writing a pattern
+#   - "why" is recorded verbatim in the <transcript>_corrections.md audit log
+#   - recording-SPECIFIC one-off fixes do NOT belong here — patch that
+#     transcript/summary directly instead
+#
+# This file is resolved by walking up from the transcript dir to the first
+# corrections.yaml found, so put a copy in your project directory.
+
+# --- example entries (replace with your own) --------------------------------
+
+- pattern: "\\bExample Org\\b"
+  replacement: "Example Organization"
+  why: "whisper drops the full form on first mention"
+
+- pattern: "exapmle university"
+  replacement: "Example University"
+  why: "frequent misspelling of the venue's name"
+
+- pattern: "\\bjohn smith\\b"
+  replacement: "Jane Smith"
+  why: "misheard speaker surname (verified against the roster)"
+
+# --- escape rules ------------------------------------------------------------
+#   \" inside double-quoted strings  ->  "
+#   \\ inside any string             ->  \   (so \\b is the \b word boundary)
+#   \' inside single-quoted strings  ->  '
